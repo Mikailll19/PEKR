@@ -129,7 +129,7 @@ body {
     background-color: transparent;
     color: #242124;
     border: 2px solid #242124;
-    border-radius: 6px;
+    border-radius: 50px;
     font-weight: bold;
     text-decoration: none;
     cursor: pointer;
@@ -199,7 +199,7 @@ body {
     color: #f9f9f9;
     padding: 6px 12px;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 50px;
 }
 
 .overlay-menu .close-btn:hover {
@@ -277,7 +277,7 @@ body {
     cursor: pointer;
     text-decoration: none;
     font-weight: bold;
-    border-radius: 5px;
+    border-radius: 50px;
 }
 
 /* Animatie */
@@ -362,7 +362,7 @@ body {
     text-decoration: none;
     font-weight: 600;
     letter-spacing: 0.5px;
-    border-radius: 6px;
+    border-radius: 50px;
     transition: all 0.35s ease;
     position: relative;
     overflow: hidden;
@@ -789,153 +789,171 @@ body {
     color: #515151;
 }
 
-/* Diensten grid */
+/* Diensten grid - bento layout */
 .diensten-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 40px;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 20px;
+    align-items: stretch;
 }
 
-/* Service card */
+.diensten-right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.diensten-bottom {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Base kaart */
 .dienst-card {
-    background: white;
-    padding: 40px 30px;
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    text-align: center;
+    background: blueviolet;
+    border-radius: 20px;
+    padding: 36px 32px;
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
 .dienst-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.08);
-    background-color: greenyellow;
-    border: 2px solid blueviolet;
-}
-.dienst-card:hover .icon-wrapper {
-    background: blueviolet;
+    transform: translateY(-4px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
 }
 
-.dienst-card:hover .icon-wrapper svg {
-    stroke: greenyellow;
+/* Grote kaart links */
+.dienst-card--large {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 500px;
 }
 
-.icon-wrapper {
-    width: 70px;
-    height: 70px;
-    margin: 0 auto 25px auto;
-    border-radius: 10%;
-    background: rgba(138, 43, 226, 0.08);
+.dienst-card--large .dienst-card-visual {
+    flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s ease;
+    margin: 30px 0;
 }
 
-.dienst-card:hover .icon-wrapper svg {
-    transform: scale(1.2) rotate(8deg);
+.dienst-card--large .dienst-card-visual svg {
+    width: 100%;
+    height: 100%;
+    stroke: greenyellow;
+    stroke-width: 1;
 }
 
-.icon-wrapper svg {
-    fill: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke: blueviolet;
+/* Brede kaart rechtsboven */
+.dienst-card--wide {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
+    gap: 20px;
+    flex: 1;
 }
 
-
-.icon-wrapper svg path {
-    stroke-dasharray: 200;
-    stroke-dashoffset: 0;
+.dienst-card--wide .dienst-card-text {
+    flex: 1;
 }
 
-.dienst-card:hover .icon-wrapper svg path {
-    animation: redraw 0.8s ease forwards;
+.dienst-card--wide .dienst-card-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-@keyframes redraw {
-    0% {
-        stroke-dashoffset: 200;
-    }
-    100% {
-        stroke-dashoffset: 100;
-    }
+.dienst-card--wide .dienst-card-visual svg {
+    width: 120px;
+    height: 120px;
+    stroke: greenyellow;
+    stroke-width: 2;
 }
 
-/* Titel */
+/* Kleine kaarten */
+.dienst-card--small {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.dienst-card-icon svg {
+    width: 36px;
+    height: 36px;
+    stroke: greenyellow;
+    stroke-width: 2;
+}
+
+/* Typografie */
 .dienst-card h3 {
-    font-size: 1.4rem;
-    margin-bottom: 15px;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #f9f9f9;
+    margin-bottom: 12px;
+    line-height: 1.2;
 }
 
-/* Beschrijving */
+.dienst-card--small h3 {
+    font-size: 1.3rem;
+}
+
 .dienst-card p {
-    color: #242124;
+    color: #f9f9f9;
     font-size: 0.95rem;
     line-height: 1.6;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
-/* Luxe knop */
+.dienst-card--small p {
+    font-size: 0.88rem;
+    margin-bottom: 0;
+}
+
+/* Knop */
 .dienst-card .btn-dienst {
     display: inline-block;
-    padding: 10px 24px;
-    border: 1px solid blueviolet;
-    color: blueviolet;
+    padding: 12px 28px;
+    background: #242124;
+    color: greenyellow;
     text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    border-radius: 6px;
-    transition: all 0.35s ease;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-}
-
-/* Smooth fill effect */
-.dienst-card .btn-dienst::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: blueviolet;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.35s ease;
-    z-index: -1;
-}
-
-.dienst-card .btn-dienst:hover::before {
-    transform: scaleX(1);
+    font-size: 0.9rem;
+    font-weight: 700;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    border: none;
+    align-self: flex-start;
 }
 
 .dienst-card .btn-dienst:hover {
-    color: greenyellow;
-    letter-spacing: 1px;
+    background: #f9f9f9;
+    color: #242124;
+    transform: scale(1.03);
 }
 .dienst-tags {
     display: flex;
-    flex-direction: column;   /* onder elkaar */
-    align-items: center;      /* horizontaal centreren */
-    gap: 10px;
-    margin: 20px 0 25px;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
 }
 
 .dienst-tags span {
-    font-size: 0.85rem;
-    padding: 6px 18px;
+    font-size: 0.8rem;
+    padding: 5px 14px;
     border-radius: 50px;
     background: #f9f9f9;
     color: #242124;
-    border: 1px solid rgba(36, 33, 36, 0.15);
     font-weight: 500;
+    border: 1px solid rgba(36, 33, 36, 0.2);
     transition: all 0.3s ease;
-    text-align: center;
 }
 
 .dienst-tags span:hover {
-    background: #242124;
-    color: greenyellow;
+    background: greenyellow;
+    color: #242124;
     transform: translateY(-2px);
 }
 
@@ -1086,7 +1104,7 @@ body {
     text-decoration: none;
     font-weight: 600;
     letter-spacing: 0.5px;
-    border-radius: 6px;
+    border-radius: 50px;
     transition: all 0.35s ease;
     position: relative;
     overflow: hidden;
@@ -1206,7 +1224,7 @@ body {
     text-decoration: none;
     font-weight: 600;
     letter-spacing: 0.5px;
-    border-radius: 6px;
+    border-radius: 50px;
     transition: all 0.35s ease;
     position: relative;
     overflow: hidden;
@@ -1803,7 +1821,6 @@ body {
     stroke: greenyellow;
 }
 
-
 .info-box svg path {
     stroke-dasharray: 200;
     stroke-dashoffset: 0;
@@ -1954,10 +1971,12 @@ body {
 
 .footer-top {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 40px;
-    margin-bottom: 40px;
+    grid-template-columns: repeat(4, 1fr); /* alle kolommen gelijke breedte */
+    margin-bottom: 50px;
     justify-items: center;
+    max-width: 82%; /* zelfde breedte als de hr en logo */
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .footer-col h4 {
@@ -1988,25 +2007,18 @@ body {
     color: greenyellow;
 }
 
-hr {
-    border: none;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    width: 84%; /* maak de lijn 50% van de breedte */
-    margin: 20px auto; /* centreert de lijn */
-}
-
 .footer-legal {
-    margin: 20px 150px;
+    margin: 20px auto;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 10px;
     font-size: 12px;
-    color: #777;
+    color: #f9f9f9;
 }
 
 .footer-links a {
-    color: #ccc;
+    color: #f9f9f9;
     margin: 0 10px;
     text-decoration: none;
 }
@@ -2018,18 +2030,17 @@ hr {
     display: flex;
     justify-content: center;
     margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 .footer-logo-big img {
-    max-width: 100%;
+    max-width: 84%; /* zelfde breedte als footer-top */
     height: auto;
     max-height: 400px;
     display: block;
-
-    /* fade van onder (0%) naar boven (100%) */
+    margin: 0 auto; /* centreert het logo */
     -webkit-mask-repeat: no-repeat;
     -webkit-mask-size: 100% 100%;
-
     mask-image: linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
     mask-repeat: no-repeat;
     mask-size: 100% 100%;
@@ -2153,25 +2164,23 @@ hr {
 
     .diensten-grid {
         grid-template-columns: 1fr;
-        gap: 24px;
+        gap: 16px;
+    }
+
+    .diensten-bottom {
+        grid-template-columns: 1fr;
     }
 
     .dienst-card {
-        padding: 28px 20px;
+        padding: 28px 22px;
+    }
+
+    .dienst-card--large {
+        min-height: 300px;
     }
 
     .dienst-card h3 {
-        font-size: 1.2rem;
-    }
-
-    .dienst-tags {
-        margin: 14px 0 18px;
-        gap: 8px;
-    }
-
-    .dienst-tags span {
-        font-size: 0.8rem;
-        padding: 5px 14px;
+        font-size: 1.3rem;
     }
 
     .portfolio-filter {
@@ -2545,6 +2554,22 @@ hr {
     .skills {
         flex-wrap: wrap;
         justify-content: center;
+    }
+    .diensten-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dienst-card--large {
+        min-height: 380px;
+    }
+
+    .dienst-card--wide {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .dienst-card--wide .dienst-card-visual {
+        display: none;
     }
 }
 
