@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
     initScrollToTop();
     initNavbarScrollHide();
     initCircles();
-    initHeroScroll();
     initCursor();
     initScrollButton();
     initPortfolioFilter();
@@ -38,7 +37,7 @@ function initFadeIn() {
 /* MENU */
 
 /* ========================= */
-function toggleMenu() {
+function toggleMenu1() {
     const menu = document.getElementById("overlayMenu");
     if (menu) menu.classList.toggle("active");
 }
@@ -55,6 +54,17 @@ function initMenuHighlight() {
         }
     });
 }
+function toggleMenu() {
+    const menu = document.getElementById('overlayMenu');
+    menu.classList.toggle('active');
+}
+
+// Sluit menu automatisch bij klikken op een link
+document.querySelectorAll('.overlay-menu .menu-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        document.getElementById('overlayMenu').classList.remove('active');
+    });
+});
 
 
 /* ========================= */
@@ -132,38 +142,6 @@ function initCircles() {
         circle.style.setProperty("--percent", percent);
         const span = circle.querySelector("span");
         if (span) span.textContent = percent + "%";
-    });
-}
-
-
-/* ========================= */
-/* HERO SCROLL ANIMATION */
-
-/* ========================= */
-function initHeroScroll() {
-
-    const hero = document.querySelector(".hero");
-    const stage = document.querySelector(".hero-stage");
-
-    if (!hero || !stage) return;
-
-    window.addEventListener("scroll", () => {
-
-        const scrollY = window.scrollY;
-        const maxScroll = stage.offsetHeight - window.innerHeight;
-
-        let progress = scrollY / maxScroll;
-        if (progress > 1) progress = 1;
-
-        const scale = 1 - (0.3 * progress);
-        hero.style.transform = `scale(${scale})`;
-
-        const radius = 40 * progress;
-        hero.style.borderRadius = radius + "px";
-
-        const width = 100 - (20 * progress);
-        hero.style.width = width + "%";
-
     });
 }
 

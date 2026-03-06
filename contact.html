@@ -18,26 +18,50 @@
                 <img src="assets/MainLogoWit.png" alt="PEKR Main Logo" class="logo-img">
             </a>
         </div>
-        <div class="menu-btn" onclick="toggleMenu()">Menu</div>
+        <div class="menu-btn" onclick="toggleMenu()">
+            <span>Menu</span>
+            <div class="menu-btn-icon">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
     </div>
 </header>
-
-<!-- Overlay-menu -->
 <div class="overlay-menu" id="overlayMenu">
     <div class="top-bar">
-        <span class="logo">PEKR®</span>
-        <span class="tagline">Grafisch ontwerp studio</span>
-        <button class="close-btn" onclick="toggleMenu()">Close</button>
+        <div class="overlay-brand">
+            <span class="overlay-logo">PEKR®</span>
+            <span class="overlay-tagline">Grafisch Ontwerp Studio</span>
+        </div>
+        <button class="close-btn" onclick="toggleMenu()">✕ Sluiten</button>
     </div>
-
     <nav class="menu-links">
-        <a href="index.html" class="rotated">Home</a>
-        <a href="diensten.html" class="rotated">Diensten</a>
-        <a href="portfolio.html" class="rotated">Portfolio</a>
-        <a href="overons.html" class="rotated">Over mij</a>
-        <a href="contact.html" class="rotated">Contact</a>
+        <a href="index.html">
+            <span class="link-number">01</span>
+            <span class="link-label">Home</span>
+            <span class="link-arrow">↗</span>
+        </a>
+        <a href="index.html#diensten">
+            <span class="link-number">02</span>
+            <span class="link-label">Diensten</span>
+            <span class="link-arrow">↗</span>
+        </a>
+        <a href="portfolio.html">
+            <span class="link-number">03</span>
+            <span class="link-label">Portfolio</span>
+            <span class="link-arrow">↗</span>
+        </a>
+        <a href="overons.html">
+            <span class="link-number">04</span>
+            <span class="link-label">Over mij</span>
+            <span class="link-arrow">↗</span>
+        </a>
+        <a href="contact.html">
+            <span class="link-number">05</span>
+            <span class="link-label">Contact</span>
+            <span class="link-arrow">↗</span>
+        </a>
     </nav>
-
     <div class="bottom-buttons">
         <a class="cta" href="contact.html">Gratis kennismaking</a>
     </div>
@@ -102,10 +126,7 @@
 
                 <!-- Social bar -->
                 <div class="social-bar">
-                    <span class="label">Social:</span>
-                    <a href="https://facebook.com/jouwpagina" target="_blank">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
+                    <span class="label">Socials:</span>
                     <a href="https://www.linkedin.com/in/mikail-peker-b15944195/" target="_blank">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
@@ -127,7 +148,6 @@
                         autocomplete="given-name"
                         required
                 >
-
                 <label for="achternaam">Achternaam *</label>
                 <input
                         type="text"
@@ -137,7 +157,6 @@
                         autocomplete="family-name"
                         required
                 >
-
                 <label for="email">E-mailadres *</label>
                 <input
                         type="email"
@@ -147,7 +166,6 @@
                         autocomplete="email"
                         required
                 >
-
                 <label for="telefoon">Telefoon *</label>
                 <input
                         type="tel"
@@ -157,7 +175,6 @@
                         pattern="^\+?[0-9\s\-]{8,15}$"
                         required
                 >
-
                 <label for="bericht">Opmerkingen of vragen? *</label>
                 <textarea
                         id="bericht"
@@ -166,7 +183,6 @@
                         rows="5"
                         required
                 ></textarea>
-
                <!-- <div class="privacy-check">
                     <input type="checkbox" id="privacy" name="privacy" required>
                     <label for="privacy">
@@ -178,7 +194,6 @@
                 <button type="submit">Verzenden →</button>
             </form>
         </div>
-
         <!-- Contact info blokken -->
         <div class="contact-info">
             <div class="info-box">
@@ -291,9 +306,19 @@
 
 <!-- Footer -->
 <footer class="custom-footer">
+    <!-- Bovenste CTA balk -->
+    <div class="footer-cta">
+        <div class="footer-cta-inner">
+            <p class="footer-cta-label">✦ Klaar om te starten?</p>
+            <h2>Laten we iets <em>moois</em> bouwen.</h2>
+        </div>
+        <a href="contact.html" class="footer-cta-btn">Neem contact op</a>
+    </div>
+    <div class="footer-divider"></div>
+    <!-- Kolommen -->
     <div class="footer-top">
         <div class="footer-col">
-            <h4><span>✦</span> Snelle links</h4>
+            <h4>✦ Snelle links</h4>
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="diensten.html">Diensten</a></li>
@@ -303,7 +328,7 @@
             </ul>
         </div>
         <div class="footer-col">
-            <h4><span>✦</span> Diensten</h4>
+            <h4>✦ Diensten</h4>
             <ul>
                 <li><a href="diensten.html">Design</a></li>
                 <li><a href="diensten.html">Branding</a></li>
@@ -313,14 +338,14 @@
             </ul>
         </div>
         <div class="footer-col">
-            <h4><span>✦</span> Socials</h4>
+            <h4>✦ Socials</h4>
             <ul>
                 <li><a href="https://www.instagram.com/pekrdesign" target="_blank">Instagram</a></li>
                 <li><a href="https://www.linkedin.com/in/mikail-peker-b15944195/" target="_blank">LinkedIn</a></li>
             </ul>
         </div>
         <div class="footer-col">
-            <h4><span>✦</span> Contact</h4>
+            <h4>✦ Contact</h4>
             <ul>
                 <li><a href="mailto:info.pekrdesign@gmail.com">info.pekrdesign@gmail.com</a></li>
                 <li><a href="tel:+32487260092">+32 487 26 00 92</a></li>
@@ -328,16 +353,18 @@
             </ul>
         </div>
     </div>
+    <!-- Logo -->
     <div class="footer-logo-big">
         <img src="assets/MainLogoWit.png" alt="PEKR Logo">
     </div>
+    <div class="footer-divider"></div>
+    <!-- Legal -->
     <div class="footer-legal">
         <p>&copy; 2026 PEKR — Alle rechten voorbehouden</p>
         <div class="footer-links">
             <a href="#">Privacybeleid</a>
             <a href="#">Gebruiksvoorwaarden</a>
-            <a href="#">Cookiebeleid
-            </a>
+            <a href="#">Cookiebeleid</a>
         </div>
     </div>
 </footer>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>PEKR Design Studio | Zichtbaar. Herkenbaar. Onvergetelijk.</title>
+    <title>PEKR Design Studio | Grafisch Ontwerp & Web Design - België</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.11/dist/dotlottie-wc.js" type="module"></script>
     <script defer src="index.js"></script>
@@ -11,7 +11,6 @@
     <!--<link rel="stylesheet" href="style-new.css">-->
 </head>
 <body>
-
 <!-- Navbar -->
 <header class="navbar">
     <div class="container">
@@ -20,62 +19,93 @@
                 <img src="assets/MainLogoWit.png" alt="PEKR Main Logo" class="logo-img">
             </a>
         </div>
-
-        <!--<nav>
-            <ul>
-                <li><a href="diensten.html">Diensten</a></li>
-                <li><a href="overons.html">Over ons</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>-->
-        <!-- NIEUW: Menu button -->
-        <div class="menu-btn" onclick="toggleMenu()">Menu</div>
+        <div class="menu-btn" onclick="toggleMenu()">
+            <span>Menu</span>
+            <div class="menu-btn-icon">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
     </div>
 </header>
-
-<!-- NIEUW: Overlay-menu -->
 <div class="overlay-menu" id="overlayMenu">
     <div class="top-bar">
-        <span class="logo">PEKR®</span>
-        <span class="tagline">Grafisch Ontwerp Studio</span>
-        <button class="close-btn" onclick="toggleMenu()">Close</button>
+        <div class="overlay-brand">
+            <span class="overlay-logo">PEKR®</span>
+            <span class="overlay-tagline">Grafisch Ontwerp Studio</span>
+        </div>
+        <button class="close-btn" onclick="toggleMenu()">✕ Sluiten</button>
     </div>
-
     <nav class="menu-links">
-        <a href="index.html" class="rotated">Home</a>
-        <a href="diensten.html" class="rotated">Diensten</a>
-        <a href="portfolio.html" class="rotated">Portfolio</a>
-        <a href="overons.html" class="rotated">Over mij</a>
-        <a href="contact.html" class="rotated">Contact</a>
+        <a href="index.html">
+            <span class="link-number">01</span>
+            <span class="link-label">Home</span>
+            <span class="link-arrow">↗</span>
+        </a>
+        <a href="index.html#diensten">
+            <span class="link-number">02</span>
+            <span class="link-label">Diensten</span>
+            <span class="link-arrow">↗</span>
+        </a>
+        <a href="portfolio.html">
+            <span class="link-number">03</span>
+            <span class="link-label">Portfolio</span>
+            <span class="link-arrow">↗</span>
+        </a>
+        <a href="overons.html">
+            <span class="link-number">04</span>
+            <span class="link-label">Over mij</span>
+            <span class="link-arrow">↗</span>
+        </a>
+        <a href="contact.html">
+            <span class="link-number">05</span>
+            <span class="link-label">Contact</span>
+            <span class="link-arrow">↗</span>
+        </a>
     </nav>
-
     <div class="bottom-buttons">
         <a class="cta" href="contact.html">Gratis kennismaking</a>
     </div>
 </div>
-
 <!-- Hero -->
 <div class="hero-stage">
-    <div class="hero-sticky">
-        <section class="hero">
-            <div class="container">
-                <h1><strong>Zichtbaar. Herkenbaar. Onvergetelijk.</strong></h1>
-                <p>Design dat jouw verhaal zichtbaar maakt en onthoudbaar blijft.</p>
-                <a href="diensten.html" class="btn">Wat We Doen</a>
-                <div class="scroll-down">
-                    <span></span>
+    <!-- Achtergrond decoratie -->
+    <div class="hero-bg-grid"></div>
+    <div class="hero-glow"></div>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-top-label">
+                <span class="hero-dot"></span>
+                <span>Grafisch Ontwerp Studio — Heusden-Zolder</span>
+            </div>
+            <h1 class="hero-title">
+                <span class="hero-line hero-line--1">Laat je merk</span>
+                <span class="hero-line hero-line--2">opvallen, groeien</span>
+                <span class="hero-line hero-line--3">& onthouden<span class="hero-accent">✦</span></span>
+            </h1>
+            <div class="hero-bottom">
+                <p class="hero-sub">Met strategisch design, sterke branding en doordachte digitale oplossingen creëren we merken die opvallen, vertrouwen opbouwen en onthouden worden.</p>
+                <div class="hero-actions">
+                    <a href="index.html#diensten" class="btn-hero-primary">Wat We Doen</a>
+                    <a href="portfolio.html" class="btn-hero-secondary">Bekijk mijn werk ↗</a>
                 </div>
             </div>
-        </section>
-    </div>
+            <div class="scroll-down" onclick="document.getElementById('diensten').scrollIntoView({behavior: 'smooth'})">
+                <span></span>
+            </div>
+            <div class="hero-marquee-wrap">
+                <div class="hero-marquee">
+                    <span>Merkstrategie ✦ Branding ✦ Rebranding ✦ Logo Design ✦ Huisstijl ✦ Visuele Identiteit ✦ Brand Guidelines ✦ Presentaties ✦ Moodboards ✦ Visitekaartjes ✦ Flyers ✦ Posters ✦ Stickers ✦ Drukwerk ✦ Custom Development ✦ Responsive Design ✦ Landingspagina's ✦ Designsysteem ✦ Prototyping ✦ Figma ✦ Gebruiksvriendelijk ✦ Social Media Posts ✦</span>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
-
 <!-- Scroll effect demo -->
-<section class="diensten fade-in-section">
+<section class="diensten fade-in-section" id="diensten">
     <div class="container">
         <div class="diensten-header">
-            <h2>Wat We Doen <span>✦</span> <span class="accent-tag">Pakketten</span></h2>
+            <h2>Wat We Doen <span>✦</span> <span class="accent-tag">Diensten</span></h2>
             <p>We bouwen sterke merken en vertalen ze naar krachtige digitale ervaringen. Van branding en webdesign tot content en visuele communicatie — strategisch doordacht en resultaatgericht uitgewerkt.</p>
         </div>
         <div class="diensten-grid">
@@ -94,11 +124,17 @@
                     <span>Brand Guidelines</span>
                     <span>Presentaties</span>
                     <span>Content Marketing</span>
+                    <span>Moodboards</span>
+                    <span>Visitekaartjes</span>
+                    <span>Flyers</span>
+                    <span>Posters</span>
+                    <span>Stickers</span>
+                    <span>Drukwerk</span>
                 </div>
                 <div class="dienst-card-visual">
                     <i data-lucide="swatch-book"></i>
                 </div>
-                <a href="contact.html" class="btn-dienst">Aan de slag</a>
+                <a href="contact.html" class="btn-dienst">Start project</a>
             </div>
             <!-- Rechterkolom -->
             <div class="diensten-right">
@@ -113,7 +149,7 @@
                             <span>Responsive Design</span>
                             <span>Landingspagina's</span>
                         </div>
-                        <a href="contact.html" class="btn-dienst">Aan de slag</a>
+                        <a href="contact.html" class="btn-dienst">Start project</a>
                     </div>
                     <div class="dienst-card-visual">
                         <i data-lucide="monitor-smartphone"></i>
@@ -132,7 +168,7 @@
                             <span>Designsysteem</span>
                             <span>Prototyping</span>
                         </div>
-                        <a href="contact.html" class="btn-dienst">Aan de slag</a>
+                        <a href="contact.html" class="btn-dienst">Start project</a>
                     </div>
                     <div class="dienst-card dienst-card--small">
                         <h3>Content & Visuals</h3>
@@ -145,9 +181,69 @@
                             <span>Marketing Visuals</span>
                             <span>Animaties</span>
                         </div>
-                        <a href="contact.html" class="btn-dienst">Aan de slag</a>
+                        <a href="contact.html" class="btn-dienst">Start project</a>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="waarom-section">
+    <div class="container">
+        <div class="waarom-header">
+            <h2>Waarom <em>Ons</em> Kiezen <span>✦</span> <span class="accent-tag">Voordelen</span></h2>
+            <p>Wij combineren strategie met esthetiek. Elk project begint met begrip — van uw markt, uw doelgroep en uw ambitie. Zo bouwen we merken die niet alleen mooi zijn, maar ook resultaat leveren.</p>
+        </div>
+        <div class="waarom-grid">
+            <div class="waarom-card">
+                <span class="card-number">01</span>
+                <div class="waarom-card-icon"><i data-lucide="target"></i></div>
+                <h3>Strategie eerst</h3>
+                <p>We starten altijd met uw merkstrategie. Een sterk visueel systeem is gebouwd op een helder fundament — niet andersom.</p>
+            </div>
+            <div class="waarom-card">
+                <span class="card-number">02</span>
+                <div class="waarom-card-icon"><i data-lucide="layers"></i></div>
+                <h3>Consistente identiteit</h3>
+                <p>Van logo tot brand guidelines — elk element sluit naadloos op elkaar aan. Uw merk oogt overal professioneel en herkenbaar.</p>
+            </div>
+            <div class="waarom-card">
+                <span class="card-number">03</span>
+                <div class="waarom-card-icon"><i data-lucide="pen-tool"></i></div>
+                <h3>Op maat gemaakt</h3>
+                <p>Geen templates, geen shortcuts. Elk merk is uniek ontworpen voor uw sector, doelgroep en positionering.</p>
+            </div>
+            <div class="waarom-card">
+                <span class="card-number">04</span>
+                <div class="waarom-card-icon"><i data-lucide="shield-check"></i></div>
+                <h3>Volledig ontzorgd</h3>
+                <p>Van eerste briefing tot eindoplevering — wij begeleiden het volledige traject. U focust op uw business, wij op uw merk.</p>
+            </div>
+            <div class="waarom-card">
+                <span class="card-number">05</span>
+                <div class="waarom-card-icon"><i data-lucide="users"></i></div>
+                <h3>Persoonlijke aanpak</h3>
+                <p>U werkt rechtstreeks met de mensen die uw merk bouwen. Directe communicatie en snel schakelen.</p>
+            </div>
+            <div class="waarom-card">
+                <span class="card-number">06</span>
+                <div class="waarom-card-icon"><i data-lucide="trending-up"></i></div>
+                <h3>Gericht op groei</h3>
+                <p>We ontwerpen niet voor vandaag. Uw merk is schaalbaar opgebouwd zodat het meegroeit met uw ambities.</p>
+            </div>
+        </div>
+        <div class="waarom-stats">
+            <div class="waarom-stat">
+                <span class="stat-number">150+</span>
+                <span class="stat-label">Merken gebouwd & getransformeerd</span>
+            </div>
+            <div class="waarom-stat">
+                <span class="stat-number">98%</span>
+                <span class="stat-label">Klanten beveelt ons aan</span>
+            </div>
+            <div class="waarom-stat">
+                <span class="stat-number">3+</span>
+                <span class="stat-label">Jaar ervaring in branding</span>
             </div>
         </div>
     </div>
@@ -378,9 +474,19 @@
 </button>
 <!-- Footer -->
 <footer class="custom-footer">
+    <!-- Bovenste CTA balk -->
+    <div class="footer-cta">
+        <div class="footer-cta-inner">
+            <p class="footer-cta-label">✦ Klaar om te starten?</p>
+            <h2>Laten we iets <em>moois</em> bouwen.</h2>
+        </div>
+        <a href="contact.html" class="footer-cta-btn">Neem contact op</a>
+    </div>
+    <div class="footer-divider"></div>
+    <!-- Kolommen -->
     <div class="footer-top">
         <div class="footer-col">
-            <h4><span>✦</span> Snelle links</h4>
+            <h4>✦ Snelle links</h4>
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="diensten.html">Diensten</a></li>
@@ -390,7 +496,7 @@
             </ul>
         </div>
         <div class="footer-col">
-            <h4><span>✦</span> Diensten</h4>
+            <h4>✦ Diensten</h4>
             <ul>
                 <li><a href="diensten.html">Design</a></li>
                 <li><a href="diensten.html">Branding</a></li>
@@ -400,31 +506,33 @@
             </ul>
         </div>
         <div class="footer-col">
-            <h4><span>✦</span> Socials</h4>
+            <h4>✦ Socials</h4>
             <ul>
                 <li><a href="https://www.instagram.com/pekrdesign" target="_blank">Instagram</a></li>
                 <li><a href="https://www.linkedin.com/in/mikail-peker-b15944195/" target="_blank">LinkedIn</a></li>
             </ul>
         </div>
         <div class="footer-col">
-            <h4><span>✦</span> Contact</h4>
+            <h4>✦ Contact</h4>
             <ul>
                 <li><a href="mailto:info.pekrdesign@gmail.com">info.pekrdesign@gmail.com</a></li>
                 <li><a href="tel:+32487260092">+32 487 26 00 92</a></li>
-                <li><a href="https://maps.app.goo.gl/8o1Ew4Xv4fMwSfNw9">Gevestigd in België</a></li>
+                <li><a href="https://maps.app.goo.gl/8o1Ew4Xv4fMwSfNw9">Gevestigd in Heusden-Zolder</a></li>
             </ul>
         </div>
     </div>
+    <!-- Logo -->
     <div class="footer-logo-big">
         <img src="assets/MainLogoWit.png" alt="PEKR Logo">
     </div>
+    <div class="footer-divider"></div>
+    <!-- Legal -->
     <div class="footer-legal">
         <p>&copy; 2026 PEKR — Alle rechten voorbehouden</p>
         <div class="footer-links">
             <a href="#">Privacybeleid</a>
             <a href="#">Gebruiksvoorwaarden</a>
-            <a href="#">Cookiebeleid
-            </a>
+            <a href="#">Cookiebeleid</a>
         </div>
     </div>
 </footer>
