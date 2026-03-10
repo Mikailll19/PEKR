@@ -8,11 +8,13 @@ document.addEventListener("DOMContentLoaded", () => {
     initCursor();
     initScrollButton();
     initPortfolioFilter();
+    initProjectReveal();   // scroll reveal voor detailpagina's
+    initVisualGallery();   // galerij met pijlen in .case-visual__img
+
 });
 
 /* ========================= */
-/* FADE IN SECTIONS */
-
+/* FADE IN SECTIONS          */
 /* ========================= */
 function initFadeIn() {
 
@@ -32,15 +34,21 @@ function initFadeIn() {
     window.addEventListener('load', handleScroll);
 }
 
-
 /* ========================= */
-/* MENU */
-
+/* MENU                      */
 /* ========================= */
-function toggleMenu1() {
-    const menu = document.getElementById("overlayMenu");
-    if (menu) menu.classList.toggle("active");
+function toggleMenu() {
+    const menu = document.getElementById('overlayMenu');
+    if (menu) menu.classList.toggle('active');
 }
+
+// Sluit menu automatisch bij klikken op een link
+document.querySelectorAll('.overlay-menu .menu-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        const menu = document.getElementById('overlayMenu');
+        if (menu) menu.classList.remove('active');
+    });
+});
 
 function initMenuHighlight() {
     const links = document.querySelectorAll('.menu-links a');
@@ -49,27 +57,15 @@ function initMenuHighlight() {
     const currentPage = window.location.pathname.split("/").pop() || 'index.html';
 
     links.forEach(link => {
-        if (link.getAttribute("href") === currentPage) {
+        const href = link.getAttribute("href");
+        if (href === currentPage) {
             link.classList.add("active");
         }
     });
 }
-function toggleMenu() {
-    const menu = document.getElementById('overlayMenu');
-    menu.classList.toggle('active');
-}
-
-// Sluit menu automatisch bij klikken op een link
-document.querySelectorAll('.overlay-menu .menu-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        document.getElementById('overlayMenu').classList.remove('active');
-    });
-});
-
 
 /* ========================= */
-/* NAVBAR: HIDE ON SCROLL DOWN / SHOW ON SCROLL UP */
-
+/* NAVBAR: HIDE ON SCROLL    */
 /* ========================= */
 function initNavbarScrollHide() {
     const navbar = document.querySelector(".navbar");
@@ -102,38 +98,29 @@ function initNavbarScrollHide() {
         }
     }
 
-    window.addEventListener("scroll", onScroll, {passive: true});
+    window.addEventListener("scroll", onScroll, { passive: true });
 }
 
 /* ========================= */
-/* SCROLL TO TOP */
-
+/* SCROLL TO TOP             */
 /* ========================= */
 function initScrollToTop() {
-
     const scrollBtn = document.getElementById("scrollToTopBtn");
     if (!scrollBtn) return;
 
     window.addEventListener("scroll", () => {
-        if (window.scrollY > 200) {
-            scrollBtn.style.display = "flex";
-        } else {
-            scrollBtn.style.display = "none";
-        }
+        scrollBtn.style.display = window.scrollY > 200 ? "flex" : "none";
     });
 
     scrollBtn.addEventListener("click", () => {
-        window.scrollTo({top: 0, behavior: "smooth"});
+        window.scrollTo({ top: 0, behavior: "smooth" });
     });
 }
 
-
 /* ========================= */
-/* CIRCLES */
-
+/* CIRCLES                   */
 /* ========================= */
 function initCircles() {
-
     const circles = document.querySelectorAll(".circle");
     if (!circles.length) return;
 
@@ -145,37 +132,30 @@ function initCircles() {
     });
 }
 
-
 /* ========================= */
-/* SCROLL BUTTON */
-
+/* SCROLL BUTTON             */
 /* ========================= */
 function initScrollButton() {
     const button = document.querySelector(".scroll-down");
     if (!button) return;
 
+    const target = document.querySelector(".hero-stage");
+    if (!target) return;
+
     button.addEventListener("click", () => {
-        window.scrollTo({
-            top: document.querySelector(".hero-stage").offsetHeight,
-            behavior: "smooth"
-        });
+        window.scrollTo({ top: target.offsetHeight, behavior: "smooth" });
     });
 }
 
-
 /* ========================= */
-/* CUSTOM CURSOR */
-
+/* CUSTOM CURSOR             */
 /* ========================= */
 function initCursor() {
-
     const dot = document.querySelector(".cursor-dot");
     if (!dot) return;
 
-    let mouseX = 0;
-    let mouseY = 0;
-    let dotX = 0;
-    let dotY = 0;
+    let mouseX = 0, mouseY = 0;
+    let dotX = 0, dotY = 0;
 
     document.addEventListener("mousemove", (e) => {
         mouseX = e.clientX;
@@ -185,45 +165,39 @@ function initCursor() {
     function animate() {
         dotX += (mouseX - dotX) * 0.25;
         dotY += (mouseY - dotY) * 0.25;
-
         dot.style.left = dotX + "px";
-        dot.style.top = dotY + "px";
-
+        dot.style.top  = dotY + "px";
         requestAnimationFrame(animate);
     }
 
     animate();
 
-    document.querySelectorAll("a, button, .btn, .dienst-card")
-        .forEach(el => {
-            el.addEventListener("mouseenter", () => {
-                dot.classList.add("hover");
-            });
-            el.addEventListener("mouseleave", () => {
-                dot.classList.remove("hover");
-            });
-        });
+    document.querySelectorAll("a, button, .btn, .dienst-card").forEach(el => {
+        el.addEventListener("mouseenter", () => dot.classList.add("hover"));
+        el.addEventListener("mouseleave", () => dot.classList.remove("hover"));
+    });
 }
 
+/* ========================= */
+/* PORTFOLIO FILTER          */
+/* ========================= */
 function initPortfolioFilter() {
-
-    // Ondersteunt zowel oude class-namen (index) als nieuwe (portfolio pagina)
-    const filterBtns  = document.querySelectorAll('.pf-filter__btn, .filter-btn');
-    const pfCards     = document.querySelectorAll('.pf-card, .portfolio-card');
-    const pfCount     = document.getElementById('pfCount');
-    const ANIM_MS     = 350;
+    const filterBtns = document.querySelectorAll('.pf-filter__btn, .filter-btn');
+    const pfCards    = document.querySelectorAll('.pf-card, .portfolio-card');
+    const pfCount    = document.getElementById('pfCount');
+    const ANIM_MS    = 350;
 
     if (!filterBtns.length || !pfCards.length) return;
 
-    filterBtns.forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            filterBtns.forEach(function(b) { b.classList.remove('active'); });
+    filterBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            filterBtns.forEach(function (b) { b.classList.remove('active'); });
             btn.classList.add('active');
 
             var filter  = btn.getAttribute('data-filter');
             var visible = 0;
 
-            pfCards.forEach(function(card) {
+            pfCards.forEach(function (card) {
                 var match = filter === 'all' || card.getAttribute('data-category') === filter;
 
                 if (match) {
@@ -232,11 +206,11 @@ function initPortfolioFilter() {
                     card.classList.remove('is-hiding');
                     void card.offsetWidth;
                     card.classList.add('is-showing');
-                    setTimeout(function() { card.classList.remove('is-showing'); }, ANIM_MS + 10);
+                    setTimeout(function () { card.classList.remove('is-showing'); }, ANIM_MS + 10);
                 } else {
                     card.classList.remove('is-showing');
                     card.classList.add('is-hiding');
-                    setTimeout(function() {
+                    setTimeout(function () {
                         card.classList.add('is-hidden');
                         card.classList.remove('is-hiding');
                     }, ANIM_MS);
@@ -244,7 +218,7 @@ function initPortfolioFilter() {
             });
 
             if (pfCount) {
-                setTimeout(function() {
+                setTimeout(function () {
                     var label = filter === 'all'
                         ? 'projecten'
                         : btn.textContent.trim().toLowerCase() + ' projecten';
@@ -255,213 +229,265 @@ function initPortfolioFilter() {
     });
 }
 
-const rows = document.querySelectorAll('.process-row');
+/* ========================= */
+/* VISUAL GALERIJ            */
+/* Meerdere <img> tags in    */
+/* .case-visual__img worden  */
+/* een carrousel met pijlen. */
+/* ========================= */
+function initVisualGallery() {
+    document.querySelectorAll('.case-visual__img').forEach(function (gallery) {
+        var imgs = Array.from(gallery.querySelectorAll('img'));
+        if (imgs.length <= 1) return;
 
-function handleProcessScroll() {
+        var current = 0;
+        var total   = imgs.length;
 
-    rows.forEach(row => {
+        // Eerste afbeelding actief
+        imgs[0].classList.add('active');
 
-        const rect = row.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        const progressBar = row.querySelector('.progress-fill');
+        // Pijlen aanmaken
+        var prev = document.createElement('button');
+        var next = document.createElement('button');
+        prev.className = 'case-visual__btn case-visual__btn--prev';
+        next.className = 'case-visual__btn case-visual__btn--next';
+        prev.setAttribute('aria-label', 'Vorige afbeelding');
+        next.setAttribute('aria-label', 'Volgende afbeelding');
+        prev.innerHTML = '&#8592;';
+        next.innerHTML = '&#8594;';
 
-        /* Reveal animatie */
-        if (rect.top < windowHeight * 0.85) {
-            row.classList.add('show');
+        // Teller aanmaken
+        var counter = document.createElement('div');
+        counter.className = 'case-visual__counter';
+        counter.innerHTML = '<span class="case-visual__counter-current">1</span> / ' + total;
+
+        gallery.appendChild(prev);
+        gallery.appendChild(next);
+        gallery.appendChild(counter);
+
+        function goTo(index) {
+            imgs[current].classList.remove('active');
+            current = (index + total) % total;
+            imgs[current].classList.add('active');
+            counter.innerHTML = '<span class="case-visual__counter-current">' + (current + 1) + '</span> / ' + total;
         }
 
-        /* Progress berekening */
-        if (rect.top < windowHeight && rect.bottom > 0) {
+        prev.addEventListener('click', function () { goTo(current - 1); });
+        next.addEventListener('click', function () { goTo(current + 1); });
 
-            const total = rect.height + windowHeight;
-            const progress = (windowHeight - rect.top) / total;
+        // Touch / swipe
+        var startX = 0;
+        gallery.addEventListener('touchstart', function (e) {
+            startX = e.touches[0].clientX;
+        }, { passive: true });
+        gallery.addEventListener('touchend', function (e) {
+            var diff = startX - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 50) goTo(diff > 0 ? current + 1 : current - 1);
+        }, { passive: true });
+    });
+}
 
-            const clamped = Math.max(0, Math.min(1, progress));
-            progressBar.style.width = (clamped * 100) + "%";
+/* ========================= */
+/* PROJECT DETAIL REVEAL     */
+/* Scroll reveal voor alle   */
+/* .reveal elementen op de   */
+/* project detailpagina's.   */
+/* ========================= */
+function initProjectReveal() {
+    var revealEls = document.querySelectorAll('.reveal');
+    if (!revealEls.length) return;
+
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0,
+        rootMargin: '0px 0px -60px 0px'
+    });
+
+    revealEls.forEach(function (el) {
+        var rect = el.getBoundingClientRect();
+        var inViewport = rect.top < window.innerHeight && rect.bottom > 0;
+
+        if (inViewport) {
+            // Al zichtbaar bij load: kleine timeout zodat CSS-transition nog afspeelt
+            setTimeout(function () { el.classList.add('visible'); }, 80);
+        } else {
+            observer.observe(el);
         }
     });
 }
 
-window.addEventListener('scroll', () => {
-    requestAnimationFrame(handleProcessScroll);
-});
+/* ========================= */
+/* PROCESS ROWS              */
+/* ========================= */
+const rows = document.querySelectorAll('.process-row');
 
-window.addEventListener('resize', handleProcessScroll);
+if (rows.length) {
 
-handleProcessScroll();
+    function handleProcessScroll() {
+        rows.forEach(row => {
+            const rect = row.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            const progressBar = row.querySelector('.progress-fill');
 
-/*------------------------Header Patroon------------------------*/
-const canvas = document.querySelector(".hero-canvas");
-const ctx = canvas.getContext("2d");
+            if (rect.top < windowHeight * 0.85) {
+                row.classList.add('show');
+            }
 
-let mouseX = -9999;
-let mouseY = -9999;
-let time = 0;
-
-let DPR = window.devicePixelRatio || 1;
-
-// =======================
-// Resize
-// =======================
-function resizeCanvas() {
-    const width = canvas.offsetWidth;
-    const height = canvas.offsetHeight;
-
-    canvas.width = width * DPR;
-    canvas.height = height * DPR;
-
-    canvas.style.width = width + "px";
-    canvas.style.height = height + "px";
-
-    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-}
-resizeCanvas();
-window.addEventListener("resize", resizeCanvas);
-
-// =======================
-// Mouse
-// =======================
-canvas.addEventListener("mousemove", (e) => {
-    const rect = canvas.getBoundingClientRect();
-    mouseX = e.clientX - rect.left;
-    mouseY = e.clientY - rect.top;
-});
-
-canvas.addEventListener("mouseleave", () => {
-    mouseX = -9999;
-    mouseY = -9999;
-});
-
-// =======================
-// Noise
-// =======================
-function fastNoise(x, y) {
-    return Math.sin(x * 0.004 + time) * 0.5 +
-        Math.cos(y * 0.004 - time) * 0.5;
-}
-
-// =======================
-// Horizontal Waves
-// =======================
-function drawHorizontal(spacing, amplitude, opacity) {
-
-    ctx.strokeStyle = `rgba(138,43,226,${opacity})`;
-    ctx.lineWidth = 1.6;
-
-    for (let y = 0; y < canvas.height / DPR; y += spacing) {
-
-        ctx.beginPath();
-
-        for (let x = 0; x < canvas.width / DPR; x += 6) {
-
-            const dx = x - mouseX;
-            const dy = y - mouseY;
-            const dist = dx * dx + dy * dy;
-
-            const mouseInfluence =
-                dist < 35000 ? (1 - dist / 35000) * amplitude : 0;
-
-            const wave =
-                fastNoise(x, y) * amplitude +
-                mouseInfluence;
-
-            ctx.lineTo(x, y + wave);
-        }
-
-        ctx.stroke();
-    }
-}
-
-// =======================
-// Sprinkles (Glow + Wave)
-// =======================
-const particles = [];
-const PARTICLE_COUNT = 60;
-
-function createParticles() {
-    particles.length = 0;
-
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-        particles.push({
-            x: Math.random() * canvas.width / DPR,
-            y: Math.random() * canvas.height / DPR,
-            vx: (Math.random() - 0.5) * 0.5,
-            vy: (Math.random() - 0.5) * 0.5,
-            size: Math.random() * 2 + 0.5
+            if (progressBar && rect.top < windowHeight && rect.bottom > 0) {
+                const total    = rect.height + windowHeight;
+                const progress = (windowHeight - rect.top) / total;
+                const clamped  = Math.max(0, Math.min(1, progress));
+                progressBar.style.width = (clamped * 100) + "%";
+            }
         });
     }
+
+    window.addEventListener('scroll', () => { requestAnimationFrame(handleProcessScroll); });
+    window.addEventListener('resize', handleProcessScroll);
+    handleProcessScroll();
 }
 
-createParticles();
-window.addEventListener("resize", createParticles);
-
-function drawParticles() {
-
-    for (let p of particles) {
-
-        // 🌊 Laat particles licht meebewegen met waves
-        const waveOffset = fastNoise(p.x, p.y) * 2;
-
-        // Mouse repulsion
-        const dx = p.x - mouseX;
-        const dy = p.y - mouseY;
-        const dist = dx * dx + dy * dy;
-
-        if (dist < 10000) {
-            p.vx += dx * 0.0002;
-            p.vy += dy * 0.0002;
-        }
-
-        p.x += p.vx;
-        p.y += p.vy + waveOffset * 0.3;
-
-        // Wrap edges
-        if (p.x < 0) p.x = canvas.width / DPR;
-        if (p.x > canvas.width / DPR) p.x = 0;
-        if (p.y < 0) p.y = canvas.height / DPR;
-        if (p.y > canvas.height / DPR) p.y = 0;
-
-        // ✨ Glow effect (lichte shadow, performant)
-        ctx.beginPath();
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = "rgba(173,43,226,0.6)";
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(255,255,255,0.8)";
-        ctx.fill();
-        ctx.shadowBlur = 0;
-    }
-}
-
-// =======================
-// Animation
-// =======================
-function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    time += 0.02;
-
-    // Waves
-    drawHorizontal(30, 8, 0.15);
-    drawHorizontal(18, 14, 0.22);
-
-    // Sprinkles
-    drawParticles();
-
-    requestAnimationFrame(animate);
-}
-
-animate();
-
-const observer = new IntersectionObserver(entries => {
+/* ========================= */
+/* FADE IN (.fade-in)        */
+/* ========================= */
+const fadeInObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('visible');
         }
     });
-}, {
-    threshold: 0.2
-});
+}, { threshold: 0.2 });
 
 document.querySelectorAll('.fade-in').forEach(el => {
-    observer.observe(el);
+    fadeInObserver.observe(el);
 });
+
+/* ========================= */
+/* CANVAS HERO (about-pagina) */
+/* Guard: alleen uitvoeren   */
+/* als .hero-canvas bestaat. */
+/* ========================= */
+const canvas = document.querySelector(".hero-canvas");
+
+if (canvas) {
+
+    const ctx = canvas.getContext("2d");
+
+    let mouseX = -9999;
+    let mouseY = -9999;
+    let time   = 0;
+    let DPR    = window.devicePixelRatio || 1;
+
+    function resizeCanvas() {
+        const width  = canvas.offsetWidth;
+        const height = canvas.offsetHeight;
+        canvas.width  = width  * DPR;
+        canvas.height = height * DPR;
+        canvas.style.width  = width  + "px";
+        canvas.style.height = height + "px";
+        ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    }
+
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    canvas.addEventListener("mousemove", (e) => {
+        const rect = canvas.getBoundingClientRect();
+        mouseX = e.clientX - rect.left;
+        mouseY = e.clientY - rect.top;
+    });
+
+    canvas.addEventListener("mouseleave", () => {
+        mouseX = -9999;
+        mouseY = -9999;
+    });
+
+    function fastNoise(x, y) {
+        return Math.sin(x * 0.004 + time) * 0.5 +
+            Math.cos(y * 0.004 - time) * 0.5;
+    }
+
+    function drawHorizontal(spacing, amplitude, opacity) {
+        ctx.strokeStyle = `rgba(138,43,226,${opacity})`;
+        ctx.lineWidth   = 1.6;
+
+        for (let y = 0; y < canvas.height / DPR; y += spacing) {
+            ctx.beginPath();
+            for (let x = 0; x < canvas.width / DPR; x += 6) {
+                const dx = x - mouseX;
+                const dy = y - mouseY;
+                const dist = dx * dx + dy * dy;
+                const mouseInfluence = dist < 35000 ? (1 - dist / 35000) * amplitude : 0;
+                const wave = fastNoise(x, y) * amplitude + mouseInfluence;
+                ctx.lineTo(x, y + wave);
+            }
+            ctx.stroke();
+        }
+    }
+
+    const particles = [];
+    const PARTICLE_COUNT = 60;
+
+    function createParticles() {
+        particles.length = 0;
+        for (let i = 0; i < PARTICLE_COUNT; i++) {
+            particles.push({
+                x:    Math.random() * canvas.width  / DPR,
+                y:    Math.random() * canvas.height / DPR,
+                vx:   (Math.random() - 0.5) * 0.5,
+                vy:   (Math.random() - 0.5) * 0.5,
+                size: Math.random() * 2 + 0.5
+            });
+        }
+    }
+
+    createParticles();
+    window.addEventListener("resize", createParticles);
+
+    function drawParticles() {
+        for (let p of particles) {
+            const waveOffset = fastNoise(p.x, p.y) * 2;
+            const dx   = p.x - mouseX;
+            const dy   = p.y - mouseY;
+            const dist = dx * dx + dy * dy;
+
+            if (dist < 10000) {
+                p.vx += dx * 0.0002;
+                p.vy += dy * 0.0002;
+            }
+
+            p.x += p.vx;
+            p.y += p.vy + waveOffset * 0.3;
+
+            if (p.x < 0) p.x = canvas.width / DPR;
+            if (p.x > canvas.width  / DPR) p.x = 0;
+            if (p.y < 0) p.y = canvas.height / DPR;
+            if (p.y > canvas.height / DPR) p.y = 0;
+
+            ctx.beginPath();
+            ctx.shadowBlur   = 10;
+            ctx.shadowColor  = "rgba(173,43,226,0.6)";
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fillStyle    = "rgba(255,255,255,0.8)";
+            ctx.fill();
+            ctx.shadowBlur   = 0;
+        }
+    }
+
+    function animateCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        time += 0.02;
+        drawHorizontal(30, 8,  0.15);
+        drawHorizontal(18, 14, 0.22);
+        drawParticles();
+        requestAnimationFrame(animateCanvas);
+    }
+
+    animateCanvas();
+}
