@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initPortfolioFilter();
     initProjectReveal();   // scroll reveal voor detailpagina's
     initVisualGallery();   // galerij met pijlen in .case-visual__img
+    initContactForm();     // bevestiging na verzenden contactformulier
 
 });
 
@@ -58,7 +59,9 @@ function initMenuHighlight() {
 
     links.forEach(link => {
         const href = link.getAttribute("href");
-        if (href === currentPage) {
+        // Verwijder hash (#diensten) voor vergelijking
+        const hrefPage = href ? href.split("#")[0] || 'index.html' : '';
+        if (hrefPage === currentPage) {
             link.classList.add("active");
         }
     });
@@ -398,3 +401,171 @@ const fadeInObserver = new IntersectionObserver(entries => {
 document.querySelectorAll('.fade-in').forEach(el => {
     fadeInObserver.observe(el);
 });
+
+/* ========================= */
+/* CANVAS HERO (about-pagina) */
+/* Guard: alleen uitvoeren   */
+/* als .hero-canvas bestaat. */
+/* ========================= */
+const canvas = document.querySelector(".hero-canvas");
+
+if (canvas) {
+
+    const ctx = canvas.getContext("2d");
+
+    let mouseX = -9999;
+    let mouseY = -9999;
+    let time   = 0;
+    let DPR    = window.devicePixelRatio || 1;
+
+    function resizeCanvas() {
+        const width  = canvas.offsetWidth;
+        const height = canvas.offsetHeight;
+        canvas.width  = width  * DPR;
+        canvas.height = height * DPR;
+        canvas.style.width  = width  + "px";
+        canvas.style.height = height + "px";
+        ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    }
+
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    canvas.addEventListener("mousemove", (e) => {
+        const rect = canvas.getBoundingClientRect();
+        mouseX = e.clientX - rect.left;
+        mouseY = e.clientY - rect.top;
+    });
+
+    canvas.addEventListener("mouseleave", () => {
+        mouseX = -9999;
+        mouseY = -9999;
+    });
+
+    function fastNoise(x, y) {
+        return Math.sin(x * 0.004 + time) * 0.5 +
+            Math.cos(y * 0.004 - time) * 0.5;
+    }
+
+    function drawHorizontal(spacing, amplitude, opacity) {
+        ctx.strokeStyle = `rgba(138,43,226,${opacity})`;
+        ctx.lineWidth   = 1.6;
+
+        for (let y = 0; y < canvas.height / DPR; y += spacing) {
+            ctx.beginPath();
+            for (let x = 0; x < canvas.width / DPR; x += 6) {
+                const dx = x - mouseX;
+                const dy = y - mouseY;
+                const dist = dx * dx + dy * dy;
+                const mouseInfluence = dist < 35000 ? (1 - dist / 35000) * amplitude : 0;
+                const wave = fastNoise(x, y) * amplitude + mouseInfluence;
+                ctx.lineTo(x, y + wave);
+            }
+            ctx.stroke();
+        }
+    }
+
+    const particles = [];
+    const PARTICLE_COUNT = 60;
+
+    function createParticles() {
+        particles.length = 0;
+        for (let i = 0; i < PARTICLE_COUNT; i++) {
+            particles.push({
+                x:    Math.random() * canvas.width  / DPR,
+                y:    Math.random() * canvas.height / DPR,
+                vx:   (Math.random() - 0.5) * 0.5,
+                vy:   (Math.random() - 0.5) * 0.5,
+                size: Math.random() * 2 + 0.5
+            });
+        }
+    }
+
+    createParticles();
+    window.addEventListener("resize", createParticles);
+
+    function drawParticles() {
+        for (let p of particles) {
+            const waveOffset = fastNoise(p.x, p.y) * 2;
+            const dx   = p.x - mouseX;
+            const dy   = p.y - mouseY;
+            const dist = dx * dx + dy * dy;
+
+            if (dist < 10000) {
+                p.vx += dx * 0.0002;
+                p.vy += dy * 0.0002;
+            }
+
+            p.x += p.vx;
+            p.y += p.vy + waveOffset * 0.3;
+
+            if (p.x < 0) p.x = canvas.width / DPR;
+            if (p.x > canvas.width  / DPR) p.x = 0;
+            if (p.y < 0) p.y = canvas.height / DPR;
+            if (p.y > canvas.height / DPR) p.y = 0;
+
+            ctx.beginPath();
+            ctx.shadowBlur   = 10;
+            ctx.shadowColor  = "rgba(173,43,226,0.6)";
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fillStyle    = "rgba(255,255,255,0.8)";
+            ctx.fill();
+            ctx.shadowBlur   = 0;
+        }
+    }
+
+    function animateCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        time += 0.02;
+        drawHorizontal(30, 8,  0.15);
+        drawHorizontal(18, 14, 0.22);
+        drawParticles();
+        requestAnimationFrame(animateCanvas);
+    }
+
+    animateCanvas();
+}
+
+
+/* ========================= */
+/* CONTACTFORMULIER          */
+/* Toont bevestiging na      */
+/* het verzenden.            */
+/* ========================= */
+function initContactForm() {
+    var form = document.querySelector('.ct-form');
+    if (!form) return;
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // Verstuur via mailto als fallback
+        var voornaam  = form.querySelector('#voornaam').value;
+        var achternaam = form.querySelector('#achternaam').value;
+        var email     = form.querySelector('#email').value;
+        var telefoon  = form.querySelector('#telefoon').value;
+        var bericht   = form.querySelector('#bericht').value;
+
+        var body = 'Voornaam: ' + voornaam + '\n'
+            + 'Achternaam: ' + achternaam + '\n'
+            + 'E-mail: ' + email + '\n'
+            + 'Telefoon: ' + telefoon + '\n\n'
+            + 'Bericht:\n' + bericht;
+
+        window.location.href = 'mailto:info.pekrdesign@gmail.com'
+            + '?subject=Nieuw bericht van ' + encodeURIComponent(voornaam + ' ' + achternaam)
+            + '&body=' + encodeURIComponent(body);
+
+        // Toon bevestiging
+        var wrap = form.closest('.ct-form-wrap');
+        if (!wrap) return;
+
+        wrap.innerHTML = '<div class="ct-success">'
+            + '<div class="ct-success__icon"><i class="fas fa-check" aria-hidden="true"></i></div>'
+            + '<h3 class="ct-success__title">Bericht verstuurd!</h3>'
+            + '<p class="ct-success__desc">Bedankt voor je bericht, <strong>' + voornaam + '</strong>. '
+            + 'Ik neem zo snel mogelijk contact met je op.</p>'
+            + '<a href="index.html" class="ct-success__btn">Terug naar home <i class="fas fa-arrow-right"></i></a>'
+            + '</div>';
+    });
+}
