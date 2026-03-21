@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initProjectReveal();   // scroll reveal voor detailpagina's
     initVisualGallery();   // galerij met pijlen in .case-visual__img
     initContactForm();     // bevestiging na verzenden contactformulier
+    initCustomSelects();   // custom dropdown menu's
 
 });
 
@@ -57,11 +58,21 @@ function initMenuHighlight() {
 
     const currentPage = window.location.pathname.split("/").pop() || 'index.html';
 
+    // Detailpagina's (project1.html, project2.html ...) vallen onder portfolio
+    const isProjectPage = /^project\d+\.html$/.test(currentPage);
+
     links.forEach(link => {
         const href = link.getAttribute("href");
-        // Verwijder hash (#diensten) voor vergelijking
-        const hrefPage = href ? href.split("#")[0] || 'index.html' : '';
+        if (!href) return;
+
+        // Links met een hash (#diensten) nooit automatisch aanduiden
+        if (href.includes('#')) return;
+
+        const hrefPage = href || 'index.html';
+
         if (hrefPage === currentPage) {
+            link.classList.add("active");
+        } else if (isProjectPage && hrefPage === 'portfolio.html') {
             link.classList.add("active");
         }
     });
@@ -526,7 +537,6 @@ if (canvas) {
     animateCanvas();
 }
 
-
 /* ========================= */
 /* CONTACTFORMULIER          */
 /* Toont bevestiging na      */
@@ -539,17 +549,20 @@ function initContactForm() {
     form.addEventListener('submit', function (e) {
         e.preventDefault();
 
-        // Verstuur via mailto als fallback
-        var voornaam  = form.querySelector('#voornaam').value;
+        var voornaam   = form.querySelector('#voornaam').value;
         var achternaam = form.querySelector('#achternaam').value;
-        var email     = form.querySelector('#email').value;
-        var telefoon  = form.querySelector('#telefoon').value;
-        var bericht   = form.querySelector('#bericht').value;
+        var email      = form.querySelector('#email').value;
+        var telefoon   = form.querySelector('#telefoon').value;
+        var dienst     = form.querySelector('#dienst') ? form.querySelector('#dienst').value : '';
+        var onderwerp  = form.querySelector('#onderwerp') ? form.querySelector('#onderwerp').value : '';
+        var bericht    = form.querySelector('#bericht').value;
 
         var body = 'Voornaam: ' + voornaam + '\n'
             + 'Achternaam: ' + achternaam + '\n'
             + 'E-mail: ' + email + '\n'
-            + 'Telefoon: ' + telefoon + '\n\n'
+            + 'Telefoon: ' + telefoon + '\n'
+            + 'Dienst: ' + dienst + '\n'
+            + 'Onderwerp: ' + onderwerp + '\n\n'
             + 'Bericht:\n' + bericht;
 
         window.location.href = 'mailto:info.pekrdesign@gmail.com'
@@ -567,5 +580,66 @@ function initContactForm() {
             + 'Ik neem zo snel mogelijk contact met je op.</p>'
             + '<a href="index.html" class="ct-success__btn">Terug naar home <i class="fas fa-arrow-right"></i></a>'
             + '</div>';
+    });
+}
+
+/* ========================= */
+/* CUSTOM SELECT DROPDOWN    */
+/* Vervangt native <select>  */
+/* voor volledige kleur-     */
+/* controle op hover.        */
+/* ========================= */
+function initCustomSelects() {
+    document.querySelectorAll('.ct-custom-select').forEach(function (select) {
+        var trigger  = select.querySelector('.ct-custom-select__trigger');
+        var valueEl  = select.querySelector('.ct-custom-select__value');
+        var options  = select.querySelectorAll('.ct-custom-select__option');
+        var input    = select.querySelector('input[type="hidden"]');
+
+        if (!trigger || !valueEl || !input) return;
+
+        // Open/sluit dropdown bij klik op trigger
+        trigger.addEventListener('click', function (e) {
+            e.stopPropagation();
+            var isOpen = select.classList.contains('is-open');
+            // Sluit alle andere open dropdowns eerst
+            document.querySelectorAll('.ct-custom-select').forEach(function (s) {
+                s.classList.remove('is-open');
+            });
+            if (!isOpen) select.classList.add('is-open');
+        });
+
+        // Kies een optie
+        options.forEach(function (option) {
+            option.addEventListener('click', function (e) {
+                e.stopPropagation();
+                var value = option.getAttribute('data-value');
+                if (!value) return;
+
+                // Waarde tonen in trigger
+                valueEl.textContent = option.textContent;
+                input.value = value;
+
+                // Actieve staat bijwerken
+                options.forEach(function (o) { o.classList.remove('is-selected'); });
+                option.classList.add('is-selected');
+
+                // Kleur trigger updaten en sluiten
+                select.classList.add('has-value');
+                select.classList.remove('is-open');
+            });
+        });
+
+        // Toetsenbord: Escape sluit dropdown
+        select.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') select.classList.remove('is-open');
+        });
+    });
+
+    // Sluit alle dropdowns bij klik buiten
+    document.addEventListener('click', function () {
+        document.querySelectorAll('.ct-custom-select').forEach(function (s) {
+            s.classList.remove('is-open');
+        });
     });
 }

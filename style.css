@@ -978,7 +978,7 @@ body {
     color: greenyellow;
 }
 .waarom-header p {
-    color: rgba(255,255,255,0.55);
+    color: #f9f9f9;
     max-width: 100%;
     margin: 0 auto;
 }
@@ -1018,7 +1018,7 @@ body {
 
 /* Kaart basis */
 .waarom-card {
-    background: blueviolet;
+    background: #f9f9f9;
     border-radius: 20px;
     padding: 36px 32px;
     position: relative;
@@ -1038,7 +1038,7 @@ body {
 .card-number {
     font-size: 2.5rem;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.4);
+    color: #0e0e0e;
     font-weight: 600;
 }
 .waarom-card-icon {
@@ -1048,19 +1048,19 @@ body {
 .waarom-card-icon svg {
     width: 32px;
     height: 32px;
-    stroke: greenyellow;
+    stroke: blueviolet;
     stroke-width: 2;
 }
 .waarom-card h3 {
     font-size: 1.5rem;
     font-weight: 800;
-    color: #f9f9f9;
+    color: #0e0e0e;
     line-height: 1.2;
 }
 .waarom-card p {
     font-size: 0.9rem;
     line-height: 1.7;
-    color: rgba(255,255,255,0.75);
+    color: #242124;
 }
 
 /*!* Stats balk *!
@@ -1968,7 +1968,7 @@ body {
 
 .pf-section__desc {
     font-size: 0.95rem;
-    color: rgba(255,255,255,0.35);
+    color: #f9f9f9;
     max-width: 100%;
     line-height: 1.65;
 }
@@ -2196,6 +2196,7 @@ body {
     color: greenyellow;
     font-weight: 800;
 }
+
 
 
 /* ============================================================
@@ -3639,7 +3640,7 @@ body.case-page {
 
 .pf-section__desc {
     font-size: 0.95rem;
-    color: rgba(255,255,255,0.35);
+    color: #f9f9f9;
     max-width: 100%;
     line-height: 1.65;
 }
@@ -4259,7 +4260,7 @@ body.case-page {
 
 .pf-hero__sub {
     font-size: clamp(0.88rem, 1.6vw, 1.05rem);
-    color: rgba(255,255,255,0.38);
+    color: #f9f9f9;
     max-width: 100%;
     margin: 0 auto;
     line-height: 1.6;
@@ -4327,7 +4328,7 @@ body.case-page {
    STATS BAR
 ============================================================ */
 .pf-stats {
-    background: #0e0e0e;
+    background: #f9f9f9;
     border-top: 1px solid rgba(255,255,255,0.06);
     border-bottom: 1px solid rgba(255,255,255,0.06);
     padding: 40px 0;
@@ -4354,7 +4355,7 @@ body.case-page {
 .pf-stats__number {
     font-size: 2.4rem;
     font-weight: 900;
-    color: greenyellow;
+    color: blueviolet;
     line-height: 1;
     margin-bottom: 6px;
     letter-spacing: -1px;
@@ -4365,7 +4366,7 @@ body.case-page {
     font-weight: 600;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.3);
+    color: #0e0e0e;
 }
 
 /* ============================================================
@@ -4446,7 +4447,7 @@ body.case-page {
 
 .ct-header__desc {
     font-size: 0.95rem;
-    color: rgba(255,255,255,0.35);
+    color: #f9f9f9;
     line-height: 1.65;
 }
 
@@ -4529,6 +4530,97 @@ body.case-page {
     min-height: 140px;
     line-height: 1.6;
 }
+/* Custom dropdown */
+.ct-custom-select {
+    position: relative;
+    user-select: none;
+}
+
+.ct-custom-select__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 14px 18px;
+    color: rgba(255,255,255,0.35);
+    font-size: 0.92rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+.ct-custom-select.is-open .ct-custom-select__trigger,
+.ct-custom-select__trigger:hover {
+    border-color: rgba(173,255,47,0.4);
+    background: rgba(255,255,255,0.07);
+}
+
+.ct-custom-select.has-value .ct-custom-select__trigger {
+    color: #f9f9f9;
+}
+
+.ct-custom-select__arrow {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.3);
+    transition: transform 0.25s ease, color 0.25s ease;
+    flex-shrink: 0;
+}
+
+.ct-custom-select.is-open .ct-custom-select__arrow {
+    transform: rotate(180deg);
+    color: greenyellow;
+}
+
+.ct-custom-select__dropdown {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    background: #1a1a1a;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+}
+
+.ct-custom-select.is-open .ct-custom-select__dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.ct-custom-select__option {
+    padding: 12px 18px;
+    font-size: 0.92rem;
+    color: rgba(255,255,255,0.6);
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.ct-custom-select__option:last-child {
+    border-bottom: none;
+}
+
+.ct-custom-select__option:first-child {
+    display: none; /* verberg de placeholder optie in dropdown */
+}
+
+.ct-custom-select__option:hover {
+    background: rgba(173,255,47,0.08);
+    color: greenyellow;
+}
+
+.ct-custom-select__option.is-selected {
+    color: greenyellow;
+    background: rgba(173,255,47,0.06);
+}
 
 /* Privacy checkbox */
 .ct-form__privacy {
@@ -4564,7 +4656,7 @@ body.case-page {
     align-items: center;
     justify-content: center;
     gap: 12px;
-    padding: 16px 200px;
+    padding: 16px 36px;
     background: greenyellow;
     color: #0e0e0e;
     font-size: 0.88rem;
@@ -4630,7 +4722,7 @@ body.case-page {
 
 .ct-info__desc {
     font-size: 0.92rem;
-    color: rgba(255,255,255,0.45);
+    color: #f9f9f9;
     line-height: 1.8;
     margin: 0;
 }
@@ -4775,32 +4867,69 @@ body.case-page {
 }
 
 /* ============================================================
-   RESPONSIVE — TABLET (768–991px)
+   RESPONSIVE — MOBIEL EXTRA KLEIN (max 480px)
 ============================================================ */
-@media (min-width: 768px) and (max-width: 991px) {
+@media (max-width: 480px) {
 
-    .pf-hero__title { letter-spacing: -1px; }
+    .pf-hero__inner { padding: 0 16px 120px; }
 
-    .pf-stats__item { padding: 0 30px; }
+    .pf-hero__title {
+        font-size: clamp(2.6rem, 13vw, 4rem);
+        letter-spacing: -0.5px;
+        line-height: 1.05;
+    }
+
+    .pf-hero__scroll { bottom: 140px; left: 44%; }
+
+    .pf-stats { padding: 28px 0; }
+    .pf-stats__inner { flex-direction: column; align-items: center; }
+    .pf-stats__item {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.07);
+        padding: 16px 0;
+    }
+    .pf-stats__item:last-child { border-bottom: none; }
+    .pf-stats__number { font-size: 2rem; }
+
+    .ct-section { padding: 48px 0 72px; }
+    .ct-section__inner { padding: 0 16px; }
+
+    .ct-header { margin-bottom: 40px; }
+    .ct-header__title { font-size: clamp(1.8rem, 8vw, 2.4rem); }
 
     .ct-grid {
         grid-template-columns: 1fr;
-        gap: 48px;
+        gap: 32px;
     }
 
     .ct-info { position: static; }
 
-    .ct-form-wrap { padding: 36px 32px; }
+    .ct-form-wrap { padding: 20px 16px; border-radius: 16px; }
+
+    .ct-form { gap: 16px; }
+
+    .ct-form__row { grid-template-columns: 1fr; gap: 16px; }
+
+    .ct-form__btn {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 20px;
+    }
+
+    .ct-info-card { padding: 18px 20px; gap: 14px; }
+
+    .ct-info-card__value { font-size: 0.82rem; }
 }
 
 /* ============================================================
-   RESPONSIVE — TABLET PORTRAIT (576–767px)
+   RESPONSIVE — TABLET KLEIN (481px – 768px)
 ============================================================ */
-@media (min-width: 576px) and (max-width: 767px) {
+@media (min-width: 481px) and (max-width: 768px) {
 
     .pf-hero__title {
+        font-size: clamp(3rem, 11vw, 5rem);
         letter-spacing: -0.5px;
-        font-size: clamp(3rem, 12vw, 5rem);
     }
 
     .pf-stats__inner { flex-wrap: wrap; justify-content: center; }
@@ -4813,7 +4942,8 @@ body.case-page {
     .pf-stats__item:last-child,
     .pf-stats__item:nth-last-child(2):nth-child(odd) { border-bottom: none; }
 
-    .ct-section { padding: 64px 0 90px; }
+    .ct-section { padding: 60px 0 90px; }
+    .ct-section__inner { padding: 0 24px; }
 
     .ct-grid {
         grid-template-columns: 1fr;
@@ -4825,53 +4955,88 @@ body.case-page {
     .ct-form-wrap { padding: 28px 24px; }
 
     .ct-form__row { grid-template-columns: 1fr; }
-}
-
-/* ============================================================
-   RESPONSIVE — MOBIEL (max 575px)
-============================================================ */
-@media (max-width: 575px) {
-
-    .pf-hero__inner { padding: 0 16px 120px; }
-
-    .pf-hero__title {
-        letter-spacing: -0.5px;
-        font-size: clamp(3rem, 14vw, 4.5rem);
-        line-height: 1.05;
-    }
-
-    .pf-hero__scroll { bottom: 150px; left: 45%; }
-
-    .pf-stats { padding: 32px 0; }
-    .pf-stats__inner { flex-direction: column; align-items: center; }
-    .pf-stats__item {
-        width: 100%;
-        border-right: none;
-        border-bottom: 1px solid rgba(255,255,255,0.07);
-        padding: 18px 0;
-    }
-    .pf-stats__item:last-child { border-bottom: none; }
-
-    .ct-section { padding: 52px 0 80px; }
-
-    .ct-header { margin-bottom: 48px; }
-
-    .ct-grid {
-        grid-template-columns: 1fr;
-        gap: 36px;
-    }
-
-    .ct-info { position: static; }
-
-    .ct-form-wrap { padding: 24px 20px; }
-
-    .ct-form__row { grid-template-columns: 1fr; }
 
     .ct-form__btn {
         width: 100%;
         justify-content: center;
+        padding: 15px 24px;
     }
 }
+
+/* ============================================================
+   RESPONSIVE — GROTE TABLET / KLEINE DESKTOP (769px – 1024px)
+============================================================ */
+@media (min-width: 769px) and (max-width: 1024px) {
+
+    .pf-hero__title { letter-spacing: -1px; }
+
+    .pf-stats__item { padding: 0 24px; }
+
+    .ct-section__inner { padding: 0 32px; }
+
+    .ct-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+    }
+
+    .ct-info { position: static; }
+
+    .ct-form-wrap { padding: 36px 32px; }
+
+    .ct-form__btn {
+        width: 100%;
+        justify-content: center;
+        padding: 16px 32px;
+    }
+}
+
+/* ============================================================
+   RESPONSIVE — BUREAUBLAD (1025px – 1440px)
+============================================================ */
+@media (min-width: 1025px) and (max-width: 1440px) {
+
+    .ct-section__inner { padding: 0 40px; }
+
+    .ct-grid {
+        grid-template-columns: 1.2fr 1fr;
+        gap: 60px;
+    }
+
+    .ct-info { position: sticky; top: 100px; }
+
+    .ct-form-wrap { padding: 44px 40px; }
+
+    .ct-form__btn {
+        align-self: flex-start;
+        padding: 16px 48px;
+    }
+}
+
+/* ============================================================
+   RESPONSIVE — BREEDBEELD (1441px+)
+============================================================ */
+@media (min-width: 1441px) {
+
+    .ct-section__inner {
+        max-width: 1400px;
+        padding: 0 60px;
+    }
+
+    .ct-grid {
+        grid-template-columns: 1.2fr 1fr;
+        gap: 80px;
+    }
+
+    .ct-form-wrap { padding: 56px 52px; }
+
+    .ct-form__btn {
+        align-self: flex-start;
+        padding: 18px 56px;
+    }
+
+    .pf-stats__item { padding: 0 64px; }
+}
+
 /* ============================================================
    BEVESTIGING NA VERZENDEN
 ============================================================ */
@@ -5546,5 +5711,19 @@ body.case-page {
 
     .footer-logo-big img {
         height: 400px;
+    }
+}
+
+/* ============================================================
+   STATS BAR FIX — desktop altijd één rij
+============================================================ */
+@media (min-width: 769px) {
+    .pf-stats__inner {
+        flex-wrap: nowrap;
+    }
+
+    .pf-stats__item {
+        flex-shrink: 0;
+        width: auto;
     }
 }

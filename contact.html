@@ -51,6 +51,11 @@
             <span class="link-label">Portfolio</span>
             <span class="link-arrow">↗</span>
         </a>
+        <a href="index.html#proces">
+            <span class="link-number">✦</span>
+            <span class="link-label">Proces</span>
+            <span class="link-arrow">↗</span>
+        </a>
         <a href="overons.html">
             <span class="link-number">✦</span>
             <span class="link-label">Over mij</span>
@@ -144,27 +149,55 @@
                     <div class="ct-form__row">
                         <div class="ct-form__group">
                             <label for="voornaam">Voornaam *</label>
-                            <input type="text" id="voornaam" name="voornaam" placeholder="Jouw voornaam" autocomplete="given-name" required>
+                            <input type="text" id="voornaam" name="voornaam" placeholder="Jan" autocomplete="given-name" required>
                         </div>
                         <div class="ct-form__group">
                             <label for="achternaam">Achternaam *</label>
-                            <input type="text" id="achternaam" name="achternaam" placeholder="Jouw achternaam" autocomplete="family-name" required>
+                            <input type="text" id="achternaam" name="achternaam" placeholder="Modaal" autocomplete="family-name" required>
                         </div>
                     </div>
 
                     <div class="ct-form__group">
                         <label for="email">E-mailadres *</label>
-                        <input type="email" id="email" name="email" placeholder="jouw@email.be" autocomplete="email" required>
+                        <input type="email" id="email" name="email" placeholder="jan@email.be" autocomplete="email" required>
                     </div>
 
                     <div class="ct-form__group">
-                        <label for="telefoon">Telefoon *</label>
-                        <input type="tel" id="telefoon" name="telefoon" placeholder="+32 4 12 34 56 78" pattern="^\+?[0-9\s\-]{8,15}$" required>
+                        <label for="telefoon">Telefoon</label>
+                        <input type="tel" id="telefoon" name="telefoon" placeholder="+32 4 12 34 56 78" pattern="^\+?[0-9\s\-]{8,15}$">
                     </div>
 
                     <div class="ct-form__group">
-                        <label for="bericht">Opmerkingen of vragen? *</label>
-                        <textarea id="bericht" name="bericht" placeholder="Vertel hier wat meer over je project of vraag..." rows="5" required></textarea>
+                        <label>Gewenste dienst *</label>
+                        <div class="ct-custom-select" id="dienstSelect">
+                            <div class="ct-custom-select__trigger">
+                                <span class="ct-custom-select__value">Selecteer een dienst...</span>
+                                <i class="fas fa-chevron-down ct-custom-select__arrow" aria-hidden="true"></i>
+                            </div>
+                            <div class="ct-custom-select__dropdown">
+                                <div class="ct-custom-select__option" data-value="">Selecteer een dienst...</div>
+                                <div class="ct-custom-select__option" data-value="Branding & Huisstijl">Branding & Huisstijl</div>
+                                <div class="ct-custom-select__option" data-value="Logo Design">Logo Design</div>
+                                <div class="ct-custom-select__option" data-value="Webdesign">Webdesign</div>
+                                <div class="ct-custom-select__option" data-value="UI/UX Design">UI/UX Design</div>
+                                <div class="ct-custom-select__option" data-value="Motion Design">Motion Design</div>
+                                <div class="ct-custom-select__option" data-value="Content & Visuals">Content & Visuals</div>
+                                <div class="ct-custom-select__option" data-value="Drukwerk">Drukwerk</div>
+                                <div class="ct-custom-select__option" data-value="Andere">Andere</div>
+                            </div>
+                            <!-- Verborgen input voor formulier verzending -->
+                            <input type="hidden" id="dienst" name="dienst" required>
+                        </div>
+                    </div>
+
+                    <div class="ct-form__group">
+                        <label for="onderwerp">Onderwerp</label>
+                        <input type="text" id="onderwerp" name="onderwerp" placeholder="Waarmee kan ik je helpen?">
+                    </div>
+
+                    <div class="ct-form__group">
+                        <label for="bericht">Bericht</label>
+                        <textarea id="bericht" name="bericht" placeholder="Vertel hier wat meer over je project of vraag..." rows="5"></textarea>
                     </div>
 
                     <div class="ct-form__privacy">
