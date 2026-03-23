@@ -720,7 +720,7 @@ body {
 /* ===== Diensten Section ===== */
 .diensten {
     background: #f9f9f9;
-    padding: 100px 0;
+    padding: 120px 0;
 }
 
 .diensten-header {
@@ -750,13 +750,16 @@ body {
     animation: pulse 2s infinite;
 }
 .diensten-header h2 {
-    font-size: 5rem;
+    color: #0e0e0e;
+    font-size: clamp(3rem, 7vw, 5.5rem);
     font-weight: 900;
-    margin-bottom: 15px;
+    line-height: 1;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
 }
 .diensten-header h2 em {
+    font-style: normal;
     color: blueviolet;
 }
 .diensten-header > p:last-child {
@@ -941,7 +944,7 @@ body {
 /* ===== Waarom voor ons kiezen? =====*/
 .waarom-section {
     background: #0e0e0e;
-    padding: 100px 0;
+    padding: 120px 0;
     position: relative;
     overflow: hidden;
 }
@@ -965,13 +968,12 @@ body {
 }
 .waarom-header h2 {
     color: #f9f9f9;
-    font-size: 5rem;
+    font-size: clamp(3rem, 7vw, 5.5rem);
     font-weight: 900;
-    margin-bottom: 15px;
-    position: relative;
-    display: inline-block;
+    line-height: 1;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
 }
 .waarom-header h2 em {
     font-style: normal;
@@ -980,7 +982,6 @@ body {
 .waarom-header p {
     color: #f9f9f9;
     max-width: 100%;
-    margin: 0 auto;
 }
 .waarom-header h2 span {
     color: greenyellow;
@@ -995,7 +996,7 @@ body {
     text-transform: uppercase;
     color: greenyellow;
     font-weight: 600;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 .eyebrow-dot-waarom {
     width: 6px;
@@ -1474,7 +1475,7 @@ body {
 /* ========================= */
 
 .process-section {
-    padding: 100px 0;
+    padding: 120px 0;
     background: #f9f9f9;
     position: relative;
     overflow: hidden;
@@ -5437,7 +5438,7 @@ body.case-page {
 
     .diensten,
     .process-section {
-        padding: 50px 0 60px;
+        padding: 120px 0 60px;
     }
 
     .diensten-header {
@@ -5458,7 +5459,7 @@ body.case-page {
     }
 
     .diensten-header p {
-        font-size: 0.9rem;
+        font-size: 1rem;
     }
 
     .diensten-grid {
@@ -5498,7 +5499,7 @@ body.case-page {
     }
 
     .process-header p {
-        font-size: 0.95rem;
+        font-size: 1rem;
     }
 
     .process-row,
