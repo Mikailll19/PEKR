@@ -206,14 +206,15 @@ body {
 .overlay-menu .menu-links {
     display: flex;
     flex-direction: column;
-    padding: 12px 0;
+    padding: 0;
 }
 
 .overlay-menu .menu-links a {
     display: flex;
     align-items: center;
     gap: 14px;
-    padding: 14px 24px;
+    padding: 0 24px;
+    min-height: 56px;
     color: #f9f9f9;
     text-decoration: none;
     border-bottom: 1px solid rgba(255,255,255,0.05);
@@ -5626,7 +5627,7 @@ body.case-page {
     }
 
     .overlay-menu .menu-links {
-        gap: 40px;
+        gap: 0;
     }
 
     .overlay-menu .menu-links a {
