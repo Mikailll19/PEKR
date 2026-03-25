@@ -56,26 +56,12 @@ function initMenuHighlight() {
     const links = document.querySelectorAll('.menu-links a');
     if (!links.length) return;
 
-    let currentPage = window.location.pathname.split("/").pop();
-
-    // Fix voor homepage
-    if (currentPage === "" || currentPage === "/") {
-        currentPage = "index.html";
-    }
-
-    // Project detail detectie
-    const isProjectPage = /^project\d+\.html$/.test(currentPage);
+    const currentURL = window.location.href;
 
     links.forEach(link => {
-        const href = link.getAttribute("href");
-        if (!href) return;
+        const linkURL = link.href;
 
-        // Haal enkel de pagina uit href (zonder #)
-        const hrefPage = href.split("#")[0] || "index.html";
-
-        if (hrefPage === currentPage) {
-            link.classList.add("active");
-        } else if (isProjectPage && hrefPage === "portfolio.html") {
+        if (currentURL.includes(linkURL)) {
             link.classList.add("active");
         }
     });
