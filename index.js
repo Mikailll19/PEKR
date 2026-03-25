@@ -66,11 +66,6 @@ function initMenuHighlight() {
         }
     });
 }
-const isProjectPage = /^project\d+\.html$/.test(currentPage);
-
-if (isProjectPage && linkPage === "portfolio.html") {
-    link.classList.add("active");
-}
 
 /* ========================= */
 /* NAVBAR: HIDE ON SCROLL    */
