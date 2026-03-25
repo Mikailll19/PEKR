@@ -56,23 +56,26 @@ function initMenuHighlight() {
     const links = document.querySelectorAll('.menu-links a');
     if (!links.length) return;
 
-    const currentPage = window.location.pathname.split("/").pop() || 'index.html';
+    let currentPage = window.location.pathname.split("/").pop();
 
-    // Detailpagina's (project1.html, project2.html ...) vallen onder portfolio
+    // Fix voor homepage
+    if (currentPage === "" || currentPage === "/") {
+        currentPage = "index.html";
+    }
+
+    // Project detail detectie
     const isProjectPage = /^project\d+\.html$/.test(currentPage);
 
     links.forEach(link => {
         const href = link.getAttribute("href");
         if (!href) return;
 
-        // Links met een hash (#diensten) nooit automatisch aanduiden
-        if (href.includes('#')) return;
-
-        const hrefPage = href || 'index.html';
+        // Haal enkel de pagina uit href (zonder #)
+        const hrefPage = href.split("#")[0] || "index.html";
 
         if (hrefPage === currentPage) {
             link.classList.add("active");
-        } else if (isProjectPage && hrefPage === 'portfolio.html') {
+        } else if (isProjectPage && hrefPage === "portfolio.html") {
             link.classList.add("active");
         }
     });
